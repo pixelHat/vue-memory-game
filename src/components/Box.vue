@@ -12,30 +12,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import Typography from './Typography.vue';
+import { defineComponent, PropType } from "vue";
+import Typography from "./Typography.vue";
 
 export default defineComponent({
   props: {
     title: {
       type: String as PropType<string>,
-      required: false
+      required: false,
     },
     value: {
       type: String as PropType<string>,
-      required: false
-    }
+      required: false,
+    },
   },
   components: {
-    Typography
-  }
+    Typography,
+  },
 });
 </script>
 
 <style scoped>
 .box {
   border-radius: 0.3125rem;
-  background: #DFE7EC;
+  background: #dfe7ec;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -58,4 +58,3 @@ export default defineComponent({
   }
 }
 </style>
-

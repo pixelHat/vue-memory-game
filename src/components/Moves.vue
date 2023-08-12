@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Box from './Box.vue';
+import { defineComponent } from "vue";
+import Box from "./Box.vue";
 
 export default defineComponent({
-  name: 'Moves',
+  name: "Moves",
   components: {
-    Box
+    Box,
   },
   props: {
     moves: {
@@ -21,4 +21,3 @@ export default defineComponent({
 </script>
 
 <style scoped></style>
-

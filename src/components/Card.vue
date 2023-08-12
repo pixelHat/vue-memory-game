@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="card"
-    :class="{ 'is-revealed': isRevealed }"
-  >
+  <div class="card" :class="{ 'is-revealed': isRevealed }">
     <div class="card__front"></div>
     <div class="card__back">
       <span class="card__value">{{ value }}</span>
@@ -11,11 +8,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Typography from './Typography.vue';
+import { defineComponent } from "vue";
+import Typography from "./Typography.vue";
 
 export default defineComponent({
-  name: 'Card',
+  name: "Card",
   components: {
     Typography,
   },
@@ -39,7 +36,8 @@ export default defineComponent({
   position: relative;
 }
 
-.card__front, .card__back {
+.card__front,
+.card__back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -53,7 +51,7 @@ export default defineComponent({
 }
 
 .card__back {
-  background-color: #FDA214;
+  background-color: #fda214;
   transform: rotateY(180deg);
   display: flex;
   justify-content: center;
@@ -61,9 +59,9 @@ export default defineComponent({
 }
 
 .card__value {
-  color: #FCFCFC;
+  color: #fcfcfc;
   text-align: center;
-  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-family: "Atkinson Hyperlegible", sans-serif;
   font-size: 2.75rem;
   font-weight: 700;
 }
@@ -80,4 +78,3 @@ export default defineComponent({
   cursor: pointer;
 }
 </style>
-

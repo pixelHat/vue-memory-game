@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GamePage from './components/GamePage.vue'
+import GamePage from "./components/GamePage.vue";
 </script>
 
 <template>

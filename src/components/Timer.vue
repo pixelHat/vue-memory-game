@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import Box from './Box.vue';
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import Box from "./Box.vue";
 
 export default {
-  name: 'Timer',
+  name: "Timer",
   components: {
-    Box
+    Box,
   },
   setup() {
     const startTime = ref(Date.now());
@@ -29,14 +29,16 @@ export default {
     const formattedTime = computed(() => {
       const minutes = Math.floor(time.value / 60);
       const seconds = time.value % 60;
-      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      return `${minutes.toString().padStart(2, "0")}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
     });
 
     return {
-      formattedTime
-    }
+      formattedTime,
+    };
   },
-}
+};
 </script>
 
 <style scoped>
@@ -45,10 +47,10 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  row-gap: .5rem;
+  row-gap: 0.5rem;
   padding: 1rem;
   border-radius: 0.625rem;
-  background-color: #DFE7EC;
+  background-color: #dfe7ec;
 }
 
 .timer__label {
@@ -66,4 +68,3 @@ export default {
   }
 }
 </style>
-

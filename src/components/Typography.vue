@@ -5,32 +5,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Typography',
+  name: "Typography",
   props: {
     variant: {
       type: String,
       required: true,
-      validator: (value: string) => ['h1', 'h2', 'h3', 'body'].includes(value),
+      validator: (value: string) => ["h1", "h2", "h3", "body"].includes(value),
     },
   },
 });
 </script>
 
 <style scoped>
-.h1, .h2, .h3, .body {
-  font-family: 'Atkinson Hyperlegible', sans-serif;
+.h1,
+.h2,
+.h3,
+.body {
+  font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: bold;
 }
 
 .h1 {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
 }
 
 .h2 {
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
 }
 
 .h3 {
@@ -38,16 +41,16 @@ export default defineComponent({
 }
 
 .body {
-  font-size: .93rem;
+  font-size: 0.93rem;
 }
 
 @media (min-width: 689.6px) {
   .h1 {
-    font-size: 3rem; 
+    font-size: 3rem;
   }
 
   .h2 {
-    font-size: 2rem; 
+    font-size: 2rem;
   }
 
   .h3 {
@@ -59,4 +62,3 @@ export default defineComponent({
   }
 }
 </style>
-
