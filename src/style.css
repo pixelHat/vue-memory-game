@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+:root {
+  --color-primary: #FDA214;
+  --color-secondary: #BCCED9;
+  --color-dark: #304859;
+  --color-darker: #152938;
+  --color-light: #F2F2F2;
+  --color-accent: #7191A5;
+  --color-accent-variant: #6395B8;
+  --color-background: #FCFCFC;
+}
