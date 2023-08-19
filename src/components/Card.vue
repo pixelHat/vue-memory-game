@@ -31,7 +31,6 @@ export default defineComponent({
 
 <style scoped>
 .card {
-  border-radius: 2.5625rem;
   width: 100%;
   position: relative;
 }
@@ -43,7 +42,7 @@ export default defineComponent({
   height: 100%;
   backface-visibility: hidden;
   transition: transform 0.6s;
-  border-radius: 2.5625rem;
+  border-radius: 50%;
 }
 
 .card__front {
@@ -62,7 +61,7 @@ export default defineComponent({
   color: #fcfcfc;
   text-align: center;
   font-family: "Atkinson Hyperlegible", sans-serif;
-  font-size: 2.75rem;
+  font-size: inherit;
   font-weight: 700;
 }
 

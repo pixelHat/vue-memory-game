@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board">
+  <div class="game-board" :style="gridSizeCss">
     <div v-for="(card, index) in cards" :key="index" class="game-board__card">
       <Card
         :value="card.value"
@@ -11,35 +11,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, computed } from "vue";
+import { Ref, computed, defineComponent, reactive, ref } from "vue";
 import Card from "./Card.vue";
+import { concat, range, shuffle, toString } from "lodash-es";
 
 export default defineComponent({
   name: "GameBoard",
+  emits: ["match"],
   components: {
     Card,
   },
-  setup() {
-    const cards = reactive([
-      { value: "1", revealed: false },
-      { value: "1", revealed: false },
-      { value: "2", revealed: false },
-      { value: "2", revealed: false },
-      { value: "3", revealed: false },
-      { value: "3", revealed: false },
-      { value: "4", revealed: false },
-      { value: "4", revealed: false },
-      { value: "5", revealed: false },
-      { value: "5", revealed: false },
-      { value: "6", revealed: false },
-      { value: "6", revealed: false },
-      { value: "7", revealed: false },
-      { value: "7", revealed: false },
-      { value: "8", revealed: false },
-      { value: "8", revealed: false },
-    ]);
+  props: {
+    size: {
+      type: Number,
+      default: 4,
+      validator(value: number) {
+        return [4, 6].includes(value);
+      },
+    },
+  },
+  setup(props, ctx) {
+    const size = (props.size * props.size) / 2;
+    const values = shuffle(concat(range(1, size + 1), range(1, size + 1))).map(
+      (value) => ({ value: toString(value), revealed: false }),
+    );
+    const cards = reactive(values);
+    const gridSizeCss = computed(() => `--grid-size: ${props.size}`);
 
-    let selectedCardIndex = ref(null);
+    let selectedCardIndex: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
       if (selectedCardIndex.value === null) {
@@ -49,7 +48,7 @@ export default defineComponent({
         if (cards[selectedCardIndex.value].value === cards[index].value) {
           cards[index].revealed = true;
           selectedCardIndex.value = null;
-          $emit("match");
+          ctx.emit("match");
         } else {
           cards[index].revealed = true;
           await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -60,21 +59,50 @@ export default defineComponent({
       }
     }
 
-    return { cards, revealCard };
+    return { cards, gridSizeCss, revealCard };
   },
 });
 </script>
 
 <style scoped>
+.game-board[style*="--grid-size: 6"] {
+  --card-size: 2.3rem;
+  font-size: 1.5rem;
+}
+.game-board[style*="--grid-size: 4"] {
+  --card-size: 4.5rem;
+  font-size: 2.5rem;
+}
 .game-board {
+  --gap: 1rem;
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(4, 4.5rem);
-  grid-template-rows: repeat(4, 4.5rem);
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-size), var(--card-size));
+  grid-template-rows: repeat(var(--grid-size), var(--card-size));
   justify-content: center;
 }
 .game-board__card {
   display: flex;
   width: 100%;
+}
+@media (min-width: 43rem) {
+  .game-board[style*="--grid-size: 6"],
+  .game-board[style*="--grid-size: 4"] {
+    --card-size: 5.125rem;
+  }
+  .game-board[style*="--grid-size: 6"] {
+    font-size: 2.75rem;
+  }
+  .game-board[style*="--grid-size: 4"] {
+    font-size: 3.5rem;
+  }
+  .game-board {
+    --gap: 1.25rem;
+  }
+}
+@media (min-width: 90rem) {
+  .game-board[style*="--grid-size: 4"] {
+    --card-size: 7.375rem;
+  }
 }
 </style>
