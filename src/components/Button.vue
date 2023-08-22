@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', variant]">
+  <button :class="['button', variant, size]">
     <slot></slot>
   </button>
 </template>
@@ -15,13 +15,17 @@ export default defineComponent({
       default: "primary",
       validator: (value: string) => ["primary", "secondary"].includes(value),
     },
+    size: {
+      type: String,
+      default: "small",
+      validator: (value: string) => ["small", "large"].includes(value),
+    },
   },
 });
 </script>
 
 <style scoped>
 .button {
-  padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   transition:
@@ -50,7 +54,7 @@ export default defineComponent({
 
 .button.secondary {
   border-radius: 1.625rem;
-  background-color: var(--color-light);
+  background-color: #dfe7ec;
   color: var(--color-dark);
 }
 
@@ -58,5 +62,17 @@ export default defineComponent({
   background-color: var(--color-accent-variant);
   color: var(--color-background);
 }
-/* 1.25rem; */
+
+.button.small {
+  padding: 0.5rem 1rem;
+}
+.button.large {
+  padding-block: 0.75rem 0.8rem;
+}
+
+@media (min-width: 43rem) {
+  .button {
+    font-size: 1.25rem;
+  }
+}
 </style>

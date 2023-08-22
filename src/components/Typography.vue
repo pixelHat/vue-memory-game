@@ -26,6 +26,7 @@ export default defineComponent({
 .body {
   font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: bold;
+  text-align: inherit;
 }
 
 .h1 {

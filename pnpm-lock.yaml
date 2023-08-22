@@ -1,17 +1,21 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@oruga-ui/oruga-next': ^0.6.0
   '@types/lodash-es': ^4.17.8
   '@vitejs/plugin-vue': ^4.2.3
   lodash-es: ^4.17.21
+  oruga-next: link:@types/@oruga-ui/oruga-next
   typescript: ^5.0.2
   vite: ^4.4.5
   vue: ^3.3.4
   vue-tsc: ^1.8.5
 
 dependencies:
+  '@oruga-ui/oruga-next': 0.6.0_vue@3.3.4
   '@types/lodash-es': 4.17.8
   lodash-es: 4.17.21
+  oruga-next: link:@types/@oruga-ui/oruga-next
   vue: 3.3.4
 
 devDependencies:
@@ -245,6 +249,14 @@ packages:
 
   /@jridgewell/sourcemap-codec/1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+
+  /@oruga-ui/oruga-next/0.6.0_vue@3.3.4:
+    resolution: {integrity: sha512-M1Y5PgCWBUDmQGH74cgzrp3vKaRFdHVtGNr0DwejeJGScB7Q6jodW4xgCz6K4hajLgHW6zxz/3ukpC4ZczlfaQ==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.3.4
+    dev: false
 
   /@types/lodash-es/4.17.8:
     resolution: {integrity: sha512-euY3XQcZmIzSy7YH5+Unb3b2X12Wtk54YWINBvvGQ5SmMvwb11JQskGsfkH/5HXK77Kr8GF0wkVDIxzAisWtog==}

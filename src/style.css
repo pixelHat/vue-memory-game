@@ -9,4 +9,26 @@
   --color-accent: #7191A5;
   --color-accent-variant: #6395B8;
   --color-background: #FCFCFC;
+
+  --oruga-modal-content-background-color: var(--color-light);
+  --oruga-modal-content-border-radius: 0.625rem;
+  --oruga-modal-overlay-background-color: rgba(0, 0, 0, .5);
+  --oruga-modal-overlay-background-color: rgba(0, 0, 0, .5);
+}
+
+body {
+  margin: 0;
+}
+
+@media (min-width: 43rem) {
+  :root {
+    --oruga-modal-content-border-radius: 1.25rem;
+  }
+}
+
+@media (min-width: 90rem) {
+}
+
+.o-modal--mobile .o-modal__content, .o-modal__content  {
+  width: min(40rem, 90vw) !important;
 }
