@@ -46,7 +46,10 @@ export default defineComponent({
 }
 
 .card__front {
-  background-color: #304859;
+  background-color: var(--color-dark);
+}
+.card__front:hover {
+  background-color: var(--color-accent-variant);
 }
 
 .card__back {

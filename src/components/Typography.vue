@@ -45,7 +45,7 @@ export default defineComponent({
   font-size: 0.93rem;
 }
 
-@media (min-width: 689.6px) {
+@media (min-width: 43rem) {
   .h1 {
     font-size: 3rem;
   }

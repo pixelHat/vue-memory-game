@@ -11,9 +11,10 @@
 </template>
 
 <script lang="ts">
-import { Ref, computed, defineComponent, reactive, ref } from "vue";
+import { Ref, computed, defineComponent, onMounted, ref } from "vue";
 import Card from "./Card.vue";
 import { concat, range, shuffle, toString } from "lodash-es";
+import stores from "../stores";
 
 export default defineComponent({
   name: "GameBoard",
@@ -31,35 +32,48 @@ export default defineComponent({
     },
   },
   setup(props, ctx) {
-    const size = (props.size * props.size) / 2;
-    const values = shuffle(concat(range(1, size + 1), range(1, size + 1))).map(
-      (value) => ({ value: toString(value), revealed: false }),
-    );
-    const cards = reactive(values);
+    let cards = ref<any>([]);
     const gridSizeCss = computed(() => `--grid-size: ${props.size}`);
-
     let selectedCardIndex: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
       if (selectedCardIndex.value === null) {
         selectedCardIndex.value = index;
-        cards[index].revealed = true;
+        cards.value[index].revealed = true;
       } else {
-        if (cards[selectedCardIndex.value].value === cards[index].value) {
-          cards[index].revealed = true;
+        stores.mutations.incrementMoves();
+        if (
+          cards.value[selectedCardIndex.value].value ===
+          cards.value[index].value
+        ) {
+          cards.value[index].revealed = true;
           selectedCardIndex.value = null;
           ctx.emit("match");
         } else {
-          cards[index].revealed = true;
+          cards.value[index].revealed = true;
           await new Promise((resolve) => setTimeout(resolve, 1000));
-          cards[index].revealed = false;
-          cards[selectedCardIndex.value].revealed = false;
+          cards.value[index].revealed = false;
+          cards.value[selectedCardIndex.value].revealed = false;
           selectedCardIndex.value = null;
         }
       }
     }
 
-    return { cards, gridSizeCss, revealCard };
+    const startBoard = () => {
+      const size = (props.size * props.size) / 2;
+      return shuffle(concat(range(1, size + 1), range(1, size + 1))).map(
+        (value) => ({ value: toString(value), revealed: false }),
+      );
+    };
+
+    const startGame = () => {
+      cards.value = startBoard();
+      selectedCardIndex.value = null;
+    };
+
+    onMounted(startGame);
+
+    return { cards, gridSizeCss, revealCard, startGame };
   },
 });
 </script>

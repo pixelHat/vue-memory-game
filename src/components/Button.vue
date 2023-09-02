@@ -67,12 +67,16 @@ export default defineComponent({
   padding: 0.5rem 1rem;
 }
 .button.large {
+  font-size: 1.125rem;
   padding-block: 0.75rem 0.8rem;
 }
 
 @media (min-width: 43rem) {
   .button {
     font-size: 1.25rem;
+  }
+  .button.large {
+    font-size: 2rem;
   }
 }
 </style>
