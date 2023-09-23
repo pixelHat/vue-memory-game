@@ -5,6 +5,8 @@
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import Box from "./Box.vue";
+import stores from "../stores";
+import { formatTimeDifference } from "../utils/date";
 
 export default {
   name: "Timer",
@@ -12,13 +14,13 @@ export default {
     Box,
   },
   setup() {
-    const startTime = ref(Date.now());
-    const time = ref(0);
     let interval: number;
+
+    const time = ref(stores.getters.timeSpent);
 
     onMounted(() => {
       interval = window.setInterval(() => {
-        time.value = Math.floor((Date.now() - startTime.value) / 1000);
+        time.value = stores.getters.timeSpent;
       }, 1000);
     });
 
@@ -27,11 +29,7 @@ export default {
     });
 
     const formattedTime = computed(() => {
-      const minutes = Math.floor(time.value / 60);
-      const seconds = time.value % 60;
-      return `${minutes.toString().padStart(2, "0")}:${seconds
-        .toString()
-        .padStart(2, "0")}`;
+      return formatTimeDifference(time.value);
     });
 
     return {

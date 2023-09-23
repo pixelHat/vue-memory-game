@@ -11,10 +11,22 @@
 </template>
 
 <script lang="ts">
-import { Ref, computed, defineComponent, onMounted, ref } from "vue";
+import {
+  Ref,
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  watchEffect,
+} from "vue";
 import Card from "./Card.vue";
 import { concat, range, shuffle, toString } from "lodash-es";
 import stores from "../stores";
+
+type Card = {
+  value: string;
+  revealed: boolean;
+};
 
 export default defineComponent({
   name: "GameBoard",
@@ -32,7 +44,7 @@ export default defineComponent({
     },
   },
   setup(props, ctx) {
-    let cards = ref<any>([]);
+    let cards = ref<Card[]>([]);
     const gridSizeCss = computed(() => `--grid-size: ${props.size}`);
     let selectedCardIndex: Ref<number | null> = ref(null);
 
@@ -58,6 +70,14 @@ export default defineComponent({
         }
       }
     }
+
+    watchEffect(() => {
+      if (cards.value.length === 0) return;
+      const canPlay = cards.value.every((card) => card.revealed);
+      if (canPlay) {
+        stores.actions.endGame();
+      }
+    });
 
     const startBoard = () => {
       const size = (props.size * props.size) / 2;

@@ -33,9 +33,14 @@
       </section>
     </div>
   </Container>
-  <o-modal v-model:active="open"><EndingGame @restart="restart" /></o-modal>
+  <o-modal v-model:active="showEndingGameModal"
+    ><EndingGame @restart="restart"
+  /></o-modal>
   <o-modal v-model:active="showPauseGameModal"
-    ><PauseMenu @resume="showPauseGameModal = false" @restart="restart"
+    ><PauseMenu
+      @resume="showPauseGameModal = false"
+      @restart="restart"
+      @new-game="newGame"
   /></o-modal>
 </template>
 
@@ -68,22 +73,29 @@ export default defineComponent({
     PauseMenu,
   },
   setup() {
-    let open = ref(false);
     let showPauseGameModal = ref(false);
+    let showEndingGameModal = computed(() => stores.state.endingGame);
     let restartGame = ref(false);
     let boardComp: Ref<typeof GameBoard | null> = ref(null);
     let moves = computed(() => stores.state.moves);
 
-    return { open, showPauseGameModal, restartGame, boardComp, moves };
+    return {
+      showEndingGameModal,
+      showPauseGameModal,
+      restartGame,
+      boardComp,
+      moves,
+    };
   },
   methods: {
     restart() {
+      stores.actions.startGame();
       this.boardComp?.startGame();
       this.showPauseGameModal = false;
-      this.open = false;
+      stores.actions.closeEndingGameMenu();
     },
     newGame() {
-      stores.mutations.goToMenu();
+      stores.actions.setupNewGame();
     },
   },
 });

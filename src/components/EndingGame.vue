@@ -9,12 +9,12 @@
     <InlineBox
       class="modal-ending-game--time"
       title="Time Elapsed"
-      body="1:53"
+      :body="timeSpent"
     />
     <InlineBox
       class="modal-ending-game--moves"
       title="Moves Taken"
-      body="39 Moves"
+      :body="moves"
     />
     <article class="button-group">
       <Button
@@ -24,7 +24,11 @@
         @click="restart"
         >Restart</Button
       >
-      <Button class="modal-ending-game--new" variant="secondary" size="large"
+      <Button
+        class="modal-ending-game--new"
+        variant="secondary"
+        size="large"
+        @click="newGame"
         >Setup New Game</Button
       >
     </article>
@@ -32,10 +36,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import Typography from "./Typography.vue";
 import Button from "./Button.vue";
 import InlineBox from "./InlineBox.vue";
+import stores from "../stores";
+import { formatTimeDifference } from "../utils/date";
 
 export default defineComponent({
   name: "EndingGame",
@@ -45,10 +51,19 @@ export default defineComponent({
     InlineBox,
     Button,
   },
-  setup() {},
+  setup() {
+    const moves = computed(() => stores.state.moves.toString());
+    const timeSpent = computed(() =>
+      formatTimeDifference(stores.getters.timeSpent),
+    );
+    return { moves, timeSpent };
+  },
   methods: {
     restart() {
       this.$emit("restart");
+    },
+    newGame() {
+      stores.actions.setupNewGame();
     },
   },
 });
@@ -70,6 +85,7 @@ export default defineComponent({
 .modal-ending-game--moves {
   margin-block-start: 1rem;
 }
+
 .button-group {
   display: flex;
   flex-direction: column;
@@ -89,6 +105,10 @@ export default defineComponent({
   }
   .button-group > * {
     width: 50%;
+  }
+  .modal-ending-game--restart,
+  .modal-ending-game--new {
+    --button-fs: 1.25rem;
   }
 }
 

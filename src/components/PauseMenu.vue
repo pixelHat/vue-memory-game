@@ -1,7 +1,7 @@
 <template>
   <article class="pause-game">
     <Button variant="primary" size="large" @click="restart">Restart</Button>
-    <Button variant="secondary" size="large">New Game</Button>
+    <Button variant="secondary" size="large" @click="newGame">New Game</Button>
     <Button variant="secondary" size="large" @click="resumeGame"
       >Resume Game</Button
     >
@@ -9,10 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, PropType } from "vue";
 import Button from "./Button.vue";
 
-const emit = defineEmits(["resume", "restart"]);
+const emit = defineEmits(["resume", "restart", "newGame"]);
 
 function resumeGame() {
   emit("resume");
@@ -20,6 +19,10 @@ function resumeGame() {
 
 function restart() {
   emit("restart");
+}
+
+function newGame() {
+  emit("newGame");
 }
 </script>
 

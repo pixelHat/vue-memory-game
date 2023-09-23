@@ -95,7 +95,7 @@ const gridSelectGroup = {
 };
 
 function startGame() {
-  store.mutations.startGame();
+  store.actions.startGame();
 }
 </script>
 

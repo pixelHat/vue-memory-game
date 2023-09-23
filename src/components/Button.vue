@@ -67,7 +67,7 @@ export default defineComponent({
   padding: 0.5rem 1rem;
 }
 .button.large {
-  font-size: 1.125rem;
+  font-size: var(--button-fs, 1.125rem);
   padding-block: 0.75rem 0.8rem;
 }
 
@@ -76,7 +76,7 @@ export default defineComponent({
     font-size: 1.25rem;
   }
   .button.large {
-    font-size: 2rem;
+    font-size: var(--button-fs, 2rem);
   }
 }
 </style>
