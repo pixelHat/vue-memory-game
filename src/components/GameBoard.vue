@@ -34,18 +34,10 @@ export default defineComponent({
   components: {
     Card,
   },
-  props: {
-    size: {
-      type: Number,
-      default: 4,
-      validator(value: number) {
-        return [4, 6].includes(value);
-      },
-    },
-  },
-  setup(props, ctx) {
+  setup(_, ctx) {
+    const boardGrid = stores.state.gridSize;
     let cards = ref<Card[]>([]);
-    const gridSizeCss = computed(() => `--grid-size: ${props.size}`);
+    const gridSizeCss = computed(() => `--grid-size: ${boardGrid}`);
     let selectedCardIndex: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
@@ -80,9 +72,12 @@ export default defineComponent({
     });
 
     const startBoard = () => {
-      const size = (props.size * props.size) / 2;
+      const size = (boardGrid * boardGrid) / 2;
       return shuffle(concat(range(1, size + 1), range(1, size + 1))).map(
-        (value) => ({ value: toString(value), revealed: false }),
+        (value) => ({
+          value: toString(value),
+          revealed: false,
+        }),
       );
     };
 

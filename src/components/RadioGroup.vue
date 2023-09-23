@@ -27,6 +27,7 @@ interface Props {
 
 const emit = defineEmits(["update:modelValue", "change"]);
 const props = defineProps<Props>();
+console.log("props", props);
 
 let selected = ref<any>(props.initialValue);
 const items = ref(props.items);

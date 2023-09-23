@@ -55,7 +55,7 @@ const themeSelectGroup = {
     { label: "Number", value: "numbers" },
     { label: "Icons", value: "icons" },
   ],
-  initialValue: "numbers",
+  initialValue: store.state.theme,
 };
 
 const playersSelect = computed({
@@ -74,7 +74,7 @@ const playersSelectGroup = {
     { label: "3", value: 3 },
     { label: "4", value: 4 },
   ],
-  initialValue: playersSelect.value,
+  initialValue: store.state.numberOfPlayers,
 };
 
 const gridSelect = computed({
@@ -91,7 +91,7 @@ const gridSelectGroup = {
     { label: "4x4", value: 4 },
     { label: "6x6", value: 6 },
   ],
-  initialValue: 4,
+  initialValue: store.state.gridSize,
 };
 
 function startGame() {
