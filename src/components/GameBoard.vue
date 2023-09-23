@@ -4,6 +4,9 @@
       <Card
         :value="card.value"
         :isRevealed="card.revealed"
+        :isSelected="
+          index === selectedCardIndex || index === selectedCardIndex2
+        "
         @click="revealCard(index)"
       />
     </div>
@@ -39,12 +42,14 @@ export default defineComponent({
     let cards = ref<Card[]>([]);
     const gridSizeCss = computed(() => `--grid-size: ${boardGrid}`);
     let selectedCardIndex: Ref<number | null> = ref(null);
+    let selectedCardIndex2: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
       if (selectedCardIndex.value === null) {
         selectedCardIndex.value = index;
         cards.value[index].revealed = true;
       } else {
+        selectedCardIndex2.value = index;
         stores.mutations.incrementMoves();
         if (
           cards.value[selectedCardIndex.value].value ===
@@ -60,6 +65,7 @@ export default defineComponent({
           cards.value[selectedCardIndex.value].revealed = false;
           selectedCardIndex.value = null;
         }
+        selectedCardIndex2.value = null;
       }
     }
 
@@ -88,7 +94,14 @@ export default defineComponent({
 
     onMounted(startGame);
 
-    return { cards, gridSizeCss, revealCard, startGame };
+    return {
+      cards,
+      gridSizeCss,
+      revealCard,
+      startGame,
+      selectedCardIndex,
+      selectedCardIndex2,
+    };
   },
 });
 </script>

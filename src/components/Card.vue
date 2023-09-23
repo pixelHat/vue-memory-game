@@ -1,5 +1,8 @@
 <template>
-  <div class="card" :class="{ 'is-revealed': isRevealed }">
+  <div
+    class="card"
+    :class="{ 'is-revealed': isRevealed, 'is-selected': isSelected }"
+  >
     <div class="card__front"></div>
     <div class="card__back">
       <span class="card__value">{{ value }}</span>
@@ -25,6 +28,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    isSelected: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 </script>
@@ -41,7 +48,10 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transition: transform 0.6s;
+  transition:
+    transform 0.6s,
+    background-color 0.6;
+  transition-duration: 0.6s, 0.6s;
   border-radius: 50%;
 }
 
@@ -53,7 +63,7 @@ export default defineComponent({
 }
 
 .card__back {
-  background-color: #fda214;
+  background-color: var(--color-secondary);
   transform: rotateY(180deg);
   display: flex;
   justify-content: center;
@@ -74,6 +84,9 @@ export default defineComponent({
 
 .is-revealed .card__back {
   transform: rotateY(0);
+}
+.is-selected .card__back {
+  background-color: var(--color-primary);
 }
 
 .card:not(.is-revealed):hover {
