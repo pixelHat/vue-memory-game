@@ -41,10 +41,12 @@ export default defineComponent({
     const boardGrid = stores.state.gridSize;
     let cards = ref<Card[]>([]);
     const gridSizeCss = computed(() => `--grid-size: ${boardGrid}`);
-    let selectedCardIndex: Ref<number | null> = ref(null);
-    let selectedCardIndex2: Ref<number | null> = ref(null);
+    const selectedCardIndex: Ref<number | null> = ref(null);
+    const selectedCardIndex2: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
+      if (selectedCardIndex.value !== null && selectedCardIndex2.value !== null)
+        return;
       if (selectedCardIndex.value === null) {
         selectedCardIndex.value = index;
         cards.value[index].revealed = true;
@@ -77,14 +79,20 @@ export default defineComponent({
       }
     });
 
+    const randomNumbers = (size: number) =>
+      shuffle(concat(range(1, size + 1), range(1, size + 1)));
+
     const startBoard = () => {
       const size = (boardGrid * boardGrid) / 2;
-      return shuffle(concat(range(1, size + 1), range(1, size + 1))).map(
-        (value) => ({
-          value: toString(value),
-          revealed: false,
-        }),
-      );
+      return randomNumbers(size).map((value) => ({
+        value: toString(value),
+        revealed: false,
+      }));
+    };
+
+    const restartGame = async () => {
+      cards.value = cards.value.map((card) => ({ ...card, revealed: false }));
+      setTimeout(startGame, 200);
     };
 
     const startGame = () => {
@@ -98,7 +106,7 @@ export default defineComponent({
       cards,
       gridSizeCss,
       revealCard,
-      startGame,
+      restartGame,
       selectedCardIndex,
       selectedCardIndex2,
     };

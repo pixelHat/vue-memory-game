@@ -90,7 +90,7 @@ export default defineComponent({
   methods: {
     restart() {
       stores.actions.startGame();
-      this.boardComp?.startGame();
+      this.boardComp?.restartGame();
       this.showPauseGameModal = false;
       stores.actions.closeEndingGameMenu();
     },

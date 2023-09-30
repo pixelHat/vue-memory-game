@@ -1,5 +1,5 @@
 <template>
-  <Box title="Moves" :value="moves"></Box>
+  <Box title="Moves" :value="moves.toString()"></Box>
 </template>
 
 <script lang="ts">
