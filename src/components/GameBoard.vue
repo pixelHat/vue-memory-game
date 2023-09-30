@@ -45,6 +45,7 @@ export default defineComponent({
     const selectedCardIndex2: Ref<number | null> = ref(null);
 
     async function revealCard(index: number) {
+      if (cards.value[index].revealed) return;
       if (selectedCardIndex.value !== null && selectedCardIndex2.value !== null)
         return;
       if (selectedCardIndex.value === null) {

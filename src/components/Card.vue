@@ -5,14 +5,21 @@
   >
     <div class="card__front"></div>
     <div class="card__back">
-      <span class="card__value">{{ value }}</span>
+      <span class="card__value">
+        <p v-if="cardImage.component === 'p'">
+          {{ cardImage.text }}
+        </p>
+        <font-awesome-icon v-else :icon="cardImage.icon" />
+      </span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import Typography from "./Typography.vue";
+import stores from "../stores";
+import { NUMBERS, ICONS } from "../utils/cardsImage";
 
 export default defineComponent({
   name: "Card",
@@ -32,6 +39,12 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+  },
+  setup(props) {
+    const theme = computed(() => stores.state.theme);
+    const cardsImage = theme.value === "numbers" ? NUMBERS : ICONS;
+    const cardImage = cardsImage.find((card) => card.name === props.value)!;
+    return { theme, cardImage };
   },
 });
 </script>
