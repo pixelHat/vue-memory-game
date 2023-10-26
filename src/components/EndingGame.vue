@@ -14,7 +14,7 @@
     <InlineBox
       class="modal-ending-game--moves"
       title="Moves Taken"
-      :body="moves"
+      :body="`${moves} Moves`"
     />
     <article class="button-group">
       <Button

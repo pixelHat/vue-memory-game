@@ -61,12 +61,14 @@ export default defineComponent({
           cards.value[index].revealed = true;
           selectedCardIndex.value = null;
           ctx.emit("match");
+          stores.actions.incrementScore();
         } else {
           cards.value[index].revealed = true;
           await new Promise((resolve) => setTimeout(resolve, 1000));
           cards.value[index].revealed = false;
           cards.value[selectedCardIndex.value].revealed = false;
           selectedCardIndex.value = null;
+          stores.actions.nextPlayer();
         }
         selectedCardIndex2.value = null;
       }
@@ -94,6 +96,7 @@ export default defineComponent({
     const restartGame = async () => {
       cards.value = cards.value.map((card) => ({ ...card, revealed: false }));
       setTimeout(startGame, 200);
+      startGame();
     };
 
     const startGame = () => {

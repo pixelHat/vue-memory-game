@@ -24,18 +24,16 @@
       <section class="game-page__container">
         <main class="game-page__board">
           <GameBoard ref="boardComp" />
+          <Footer v-show="isSinglePlayer" />
         </main>
-
-        <footer class="game-page__footer">
-          <Timer />
-          <Moves :moves="moves"></Moves>
-        </footer>
       </section>
+      <Footer v-show="!isSinglePlayer" />
     </div>
   </Container>
-  <o-modal v-model:active="showEndingGameModal"
-    ><EndingGame @restart="restart"
-  /></o-modal>
+  <o-modal v-model:active="showEndingGameModal">
+    <EndingGame @restart="restart" v-if="isSinglePlayer" />
+    <MultipEndingGame @restart="restart" v-else />
+  </o-modal>
   <o-modal v-model:active="showPauseGameModal"
     ><PauseMenu
       @resume="showPauseGameModal = false"
@@ -48,43 +46,39 @@
 import { computed, defineComponent, ref, Ref } from "vue";
 import GameBoard from "./GameBoard.vue";
 import Container from "./Container.vue";
-import ScoreBoard from "./ScoreBoard.vue";
-import Timer from "./Timer.vue";
 import Typography from "./Typography.vue";
 import Button from "./Button.vue";
-import Box from "./Box.vue";
-import Moves from "./Moves.vue";
 import EndingGame from "./EndingGame.vue";
 import PauseMenu from "./PauseMenu.vue";
+import Footer from "./Footer.vue";
+import MultipEndingGame from "./MultipEndingGame.vue";
 import stores from "../stores";
 
 export default defineComponent({
   name: "GamePage",
   components: {
     GameBoard,
-    ScoreBoard,
-    Timer,
     Typography,
     Button,
     Container,
-    Box,
-    Moves,
     EndingGame,
     PauseMenu,
+    Footer,
+    MultipEndingGame,
   },
   setup() {
     let showPauseGameModal = ref(false);
     let showEndingGameModal = computed(() => stores.state.endingGame);
     let restartGame = ref(false);
     let boardComp: Ref<typeof GameBoard | null> = ref(null);
-    let moves = computed(() => stores.state.moves);
+    let isSinglePlayer = computed(() => stores.state.numberOfPlayers === 1);
 
     return {
       showEndingGameModal,
       showPauseGameModal,
       restartGame,
       boardComp,
-      moves,
+      isSinglePlayer,
     };
   },
   methods: {
@@ -122,15 +116,10 @@ export default defineComponent({
   margin-block-start: 5.3rem;
 }
 
-.game-page__footer {
-  margin-block-start: 5.3rem;
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(2, 1fr);
-}
 .menu-buttons {
   display: none;
 }
+
 @media (min-width: 43rem) {
   .game-page__actions--mobile {
     display: none;

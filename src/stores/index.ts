@@ -1,5 +1,9 @@
 import { reactive, readonly } from "vue";
 
+type Player = {
+  score: number;
+};
+
 interface State {
   numberOfPlayers: number;
   gridSize: number;
@@ -9,6 +13,8 @@ interface State {
   endingGame: boolean;
   timeStarted: number | null;
   timeEnded: number | null;
+  currentPlayer: number;
+  players: Player[];
 }
 
 const state: State = reactive({
@@ -20,6 +26,8 @@ const state: State = reactive({
   endingGame: false,
   timeStarted: null,
   timeEnded: null,
+  currentPlayer: 0,
+  players: [{ score: 0 }, { score: 0 }, { score: 0 }, { score: 0 }],
 });
 
 const mutations = {
@@ -52,6 +60,8 @@ const actions = {
     state.timeStarted = Date.now();
     state.timeEnded = null;
     state.gamePage = "playing";
+    state.players = [{ score: 0 }, { score: 0 }, { score: 0 }, { score: 0 }];
+    state.currentPlayer = 0;
   },
   endGame() {
     state.timeEnded = Date.now();
@@ -60,6 +70,12 @@ const actions = {
   setupNewGame() {
     state.gamePage = "menu";
     actions.closeEndingGameMenu();
+  },
+  nextPlayer() {
+    state.currentPlayer = (state.currentPlayer + 1) % state.numberOfPlayers;
+  },
+  incrementScore() {
+    state.players[state.currentPlayer].score += 1;
   },
 };
 

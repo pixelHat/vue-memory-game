@@ -42,8 +42,12 @@ export default defineComponent({
   },
   setup(props) {
     const theme = computed(() => stores.state.theme);
-    const cardsImage = theme.value === "numbers" ? NUMBERS : ICONS;
-    const cardImage = cardsImage.find((card) => card.name === props.value)!;
+    const cardsImage = computed(() =>
+      theme.value === "numbers" ? NUMBERS : ICONS,
+    );
+    const cardImage = computed(
+      () => cardsImage.value.find((card) => card.name === props.value)!,
+    );
     return { theme, cardImage };
   },
 });

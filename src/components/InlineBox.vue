@@ -38,10 +38,12 @@ export default defineComponent({
   justify-content: space-between;
 }
 .inline-box--title {
-  color: #7191a5;
+  color: var(--inline-box-title-color, #7191a5);
+  display: flex;
+  align-items: center;
 }
 .inline-box--body {
-  color: #304859;
+  color: var(--inline-box-body-color, #304859);
 }
 
 @media (min-width: 43rem) {

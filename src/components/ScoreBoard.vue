@@ -6,7 +6,8 @@
           :class="{ 'score-board__label--active': active }"
           class="score-board__label"
           variant="body"
-          >{{ label }}</Typography
+          ><span>{{ label }}</span
+          ><span>{{ smallLabel }}</span></Typography
         >
       </template>
       <template #value>
@@ -37,6 +38,10 @@ export default defineComponent({
   },
   props: {
     label: {
+      type: String,
+      required: true,
+    },
+    smallLabel: {
       type: String,
       required: true,
     },
@@ -82,7 +87,11 @@ export default defineComponent({
 }
 
 .score-board__label {
+  font-weight: bold;
   color: var(--color-accent);
+}
+.score-board__label > span:first-child {
+  display: none;
 }
 .score-board__score {
   color: var(--color-dark);
@@ -98,18 +107,34 @@ export default defineComponent({
 }
 
 .score-board__turn {
-  color: #152938;
+  display: none;
+  color: var(--color-darker);
   text-align: center;
   font-size: 0.8125rem;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.3125rem;
-  margin-top: 0.5rem;
+  margin-top: 1.44rem;
 }
 
-@media (min-width: 689.6px) {
+@media (min-width: 43rem) {
+  .score-board {
+    align-items: flex-start;
+  }
+  .score-board__label > span:first-child {
+    display: inline;
+  }
+  .score-board__label > span:last-child {
+    display: none;
+  }
+}
+@media (min-width: 90rem) {
   .score-board {
     flex-direction: row;
+    align-items: center;
+  }
+  .score-board__turn {
+    display: block;
   }
 }
 </style>
