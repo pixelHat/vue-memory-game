@@ -7,7 +7,7 @@ interface CardImage {
   name: string;
 }
 
-export const NUMBERS: CardImage[] = range(1, 9).map((number) => ({
+export const NUMBERS: CardImage[] = range(1, 19).map((number) => ({
   name: number.toString(),
   component: "p",
   text: number.toString(),
