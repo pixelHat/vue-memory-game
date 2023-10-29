@@ -1,5 +1,4 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faDocker } from "@fortawesome/free-brands-svg-icons";
 import {
   faBone,
   faCamera,
