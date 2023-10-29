@@ -1,18 +1,43 @@
-# Vue 3 + TypeScript + Vite
+# Frontend Mentor - Memory Game solution
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-## Recommended IDE Setup
+## Table of contents
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Links](#links)
+- [My process](#my-process)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-## Type Support For `.vue` Imports in TS
+## Overview
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+### The challenge
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Your users should be able to:
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Play the Memory game either solo or multiplayer (up to 4 players)
+- Set the theme to use numbers or icons within the tiles
+- Choose to play on either a 6x6 or 4x4 grid
+- View the optimal layout for the game depending on their device's screen size
+- See hover states for all interactive elements on the page
+
+### Links
+
+- [Solution URL](https://github.com/pixelHat/vue-memory-game)
+- [Live Site URL](https://pixelhat.github.io/vue-memory-game/)
+
+## My process
+
+I made this project to learn more about Vue 3 and to start my study to get a Vue certificate. So, I tried to use as much features from Vue as I could.
+
+### Useful resources
+
+- [Vue documentation](https://vuejs.org/guide/introduction.html)
+
+## Author
+
+- Github - [pixelHat](https://github.com/pixelHat)
+- Frontend Mentor - [@pixelHat](https://www.frontendmentor.io/profile/pixelHat)

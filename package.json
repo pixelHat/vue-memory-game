@@ -17,7 +17,7 @@
     "@oruga-ui/oruga-next": "^0.6.0",
     "@types/lodash-es": "^4.17.8",
     "lodash-es": "^4.17.21",
-    "oruga-next": "file:@types/@oruga-ui/oruga-next",
+    "oruga-next": "link:@types/@oruga-ui/oruga-next",
     "vue": "^3.3.4"
   },
   "devDependencies": {
