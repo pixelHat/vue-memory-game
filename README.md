@@ -1,6 +1,6 @@
 # Frontend Mentor - Memory Game solution
 
-This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+This is a solution to the [Memory game challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -8,11 +8,14 @@ This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www
   - [The challenge](#the-challenge)
   - [Links](#links)
 - [My process](#my-process)
-  - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
+
+![menu](doc/menu.png)
+![playing](doc/playing.png)
+![mobile](doc/mobile.webp)
 
 ### The challenge
 
